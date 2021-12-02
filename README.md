@@ -1,4 +1,4 @@
-# Matrix-Add
+# CUDA-Examples
 
 A basic set of programs that perform a variety of parralised linear algebra operations using [CUDA](https://en.wikipedia.org/wiki/CUDA).
 - *N* size vector addition

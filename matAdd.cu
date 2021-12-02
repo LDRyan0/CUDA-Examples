@@ -50,7 +50,7 @@ int main(int argc, char* argv[]) {
 
     // output input matrices
     print2DArray(ha);
-    print2DArray(hc);
+    print2DArray(hb);
     
     printf("Performing elementwise addition...\n\n");
     printf("Thread sequence: ");
@@ -61,14 +61,14 @@ int main(int argc, char* argv[]) {
     printf("\n\n");
 
     // output resultant matrix
-    print2DArray(hb);
+    print2DArray(hc);
     
     // check that the addition has been performed correctly
     // absolute error 1e-5
     bool success = true;
     int total=0;
     printf("Checking %d values in the array...\n\n", N*N);
-    for (int i=0; i<N; i++) {
+    for (int i=0; i<N*N; i++) {
         if (abs((ha[i] + hb[i]) - hc[i]) > 1e-5) {
             printf( "Error:  %0.2e + %0.2e != %0.2e\n", ha[i], hb[i], hc[i] );
             success = false;

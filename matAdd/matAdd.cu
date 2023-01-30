@@ -91,4 +91,5 @@ int main(int argc, char* argv[]) {
     cudaFree(db);
     cudaFree(dc);
 
-}
+} 
+

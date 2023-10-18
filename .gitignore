@@ -1,0 +1,7 @@
+# ignore all binaries
+src/*
+!*.*
+!*/
+!Makefile
+
+.vscode/

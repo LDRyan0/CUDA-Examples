@@ -188,10 +188,25 @@ int main(int argc, char **argv) {
     printf("%25s%25s\n", "Routine", "Bandwidth (GB/s)");
 
 
+    printf("--------------------------------------------------\n");
+    
+    // ---------------
+    // cudaMemcpy
+    // ---------------
+    printf("%25s", "cudaMemcpy");
+    // transfer input data to device
+    checkCuda(cudaMemset(d_cdata, 0, mem_size));
+    checkCuda(cudaEventRecord(startEvent));
+    for(int i = 0; i < NUM_REPS; i++)
+        checkCuda(cudaMemcpy(d_cdata, d_idata, mem_size, cudaMemcpyDeviceToDevice));
+    checkCuda(cudaEventRecord(stopEvent));
+    checkCuda(cudaEventSynchronize(stopEvent));
+    checkCuda(cudaEventElapsedTime(&ms, startEvent, stopEvent));
+    postProcess(h_idata, h_idata, nx*ny, ms);
+    
     // ---------------
     // sendReceivePCIe
     // ---------------
-    printf("--------------------------------------------------\n");
     printf("%25s", "sendReceivePCIe");
     // transfer input data to device
     checkCuda(cudaMemset(d_cdata, 0, mem_size));
@@ -203,8 +218,8 @@ int main(int argc, char **argv) {
     checkCuda(cudaEventSynchronize(stopEvent));
     checkCuda(cudaEventElapsedTime(&ms, startEvent, stopEvent));
     postProcess(h_idata, h_idata, nx*ny, ms);
-    printf("--------------------------------------------------\n");
 
+    printf("--------------------------------------------------\n");
 
     // ----
     // copy
